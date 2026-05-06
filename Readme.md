@@ -1,8 +1,16 @@
 <div align="center">
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,20&height=220&section=header&text=Rapido%20Revenue%20Leak%20Analysis&fontSize=42&fontAlignY=38&animation=fadeIn&fontColor=ffffff&desc=Uncovering%20hidden%20losses%20across%2050%2C000%20Bangalore%20rides&descAlignY=60&descSize=17)
+![header](https://capsule-render.vercel.app/api?type=waving&color=FFCC00&height=220&section=header&text=Rapido%20Revenue%20Leak%20Analysis&fontSize=42&fontAlignY=38&animation=fadeIn&fontColor=000000&desc=Uncovering%20hidden%20losses%20across%2050%2C000%20Bangalore%20rides&descAlignY=60&descSize=17&descColor=1a1a1a)
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=2800&pause=900&color=F7B731&center=true&vCenter=true&width=800&lines=49%2C801+rides+analysed+across+Bangalore;%E2%82%B96%2C837%2C929+in+total+revenue+mapped;10.4%25+cancellation+rate+driving+revenue+loss;%E2%82%B91%2C20%2C000%2Fmo+recoverable+with+targeted+fixes;Python+%E2%80%A2+Pandas+%E2%80%A2+Tableau+%E2%80%A2+Statistics)](https://github.com/vedant-valid/rapido-revenue-leak-analysis)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2800&pause=900&color=FFCC00&background=000000&center=true&vCenter=true&width=820&lines=49%2C801+rides+analysed+across+Bangalore;%E2%82%B96%2C837%2C929+in+total+revenue+mapped;10.4%25+cancellation+rate+driving+revenue+loss;%E2%82%B91%2C20%2C000%2Fmo+recoverable+with+targeted+fixes;Python+%E2%80%A2+Pandas+%E2%80%A2+Tableau+%E2%80%A2+Statistics)](https://github.com/vedant-valid/rapido-revenue-leak-analysis)
+
+<br/>
+
+![Python](https://img.shields.io/badge/Python-000000?style=for-the-badge&logo=python&logoColor=FFCC00)
+![Pandas](https://img.shields.io/badge/Pandas-000000?style=for-the-badge&logo=pandas&logoColor=FFCC00)
+![Jupyter](https://img.shields.io/badge/Jupyter-000000?style=for-the-badge&logo=jupyter&logoColor=FFCC00)
+![Tableau](https://img.shields.io/badge/Tableau-000000?style=for-the-badge&logo=tableau&logoColor=FFCC00)
+![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=FFCC00)
 
 </div>
 
@@ -22,15 +30,15 @@ This project processes **49,801 Bangalore ride transactions** to answer that que
 
 <div align="center">
 
-| Metric | Value |
-|:---|:---|
-| Total Revenue Mapped | **₹ 68,37,929** |
-| Rides Analysed | **49,801** |
-| Cancellation Rate | **10.4%** — 5,180 lost rides |
-| Avg Revenue per Ride | **₹ 153.24** |
-| Peak-Hour Cancel Spike | **+15–20%** above baseline |
-| Monthly Recovery Potential | **₹ 1,20,000** from top 5 zones alone |
-| Revenue Hotspot Share | **40%** of revenue from 2 zones |
+| | Metric | Value |
+|:---:|:---|:---|
+| ![r](https://img.shields.io/badge/-%E2%82%B9-FFCC00?style=flat-square&labelColor=000000) | Total Revenue Mapped | **₹ 68,37,929** |
+| ![r](https://img.shields.io/badge/-rides-FFCC00?style=flat-square&labelColor=000000) | Rides Analysed | **49,801** |
+| ![r](https://img.shields.io/badge/-cancel-FFCC00?style=flat-square&labelColor=000000) | Cancellation Rate | **10.4%** — 5,180 lost rides |
+| ![r](https://img.shields.io/badge/-avg-FFCC00?style=flat-square&labelColor=000000) | Avg Revenue per Ride | **₹ 153.24** |
+| ![r](https://img.shields.io/badge/-peak-FFCC00?style=flat-square&labelColor=000000) | Peak-Hour Cancel Spike | **+15–20%** above baseline |
+| ![r](https://img.shields.io/badge/-recover-FFCC00?style=flat-square&labelColor=000000) | Monthly Recovery Potential | **₹ 1,20,000** from top 5 zones |
+| ![r](https://img.shields.io/badge/-hotspot-FFCC00?style=flat-square&labelColor=000000) | Revenue Hotspot Share | **40%** of revenue from 2 zones |
 
 </div>
 
@@ -38,50 +46,47 @@ This project processes **49,801 Bangalore ride transactions** to answer that que
 
 ## What the Data Revealed
 
-**1. High demand = more cancellations, not fewer**
+> **1. High demand = more cancellations, not fewer**
 Zones with demand z-score > 1.0 show disproportionately higher cancellation rates — driver supply isn't scaling with demand.
 
-**2. Two windows account for most of the damage**
+> **2. Two windows account for most of the damage**
 Cancellations spike **15–20%** during 8–10 AM and 5–7 PM. `cab_economy` and `auto` are the worst hit — both high-volume, high-margin services.
 
-**3. ₹1,20,000/month sitting on the table**
-Reducing cancellations in just the **top 5 high-demand zones by 10%** recovers ~₹1.2L monthly. This is a surgical fix, not a platform overhaul.
+> **3. ₹1,20,000/month sitting on the table**
+Reducing cancellations in just the **top 5 high-demand zones by 10%** recovers ~₹1.2L monthly. Surgical fix, not a platform overhaul.
 
-**4. Bikes are the floor, not the ceiling**
-`bike` and `bike_lite` maintain **92%+ completion rates** even during peak hours — they're the most operationally resilient service type.
+> **4. Bikes are the floor, not the ceiling**
+`bike` and `bike_lite` maintain **92%+ completion rates** even during peak hours — the most operationally resilient service type.
 
-**5. Koramangala & HSR Layout carry the revenue**
+> **5. Koramangala & HSR Layout carry the revenue**
 Two zones generate **40% of total revenue** but suffer inconsistent driver availability — the highest-ROI targets for supply intervention.
 
 ---
 
-## Pipeline — How the Data Was Transformed
+## Pipeline — Raw Data to Insight
 
 ```
-Raw CSV (51,000 rows, 13 cols)
-        │
-        ▼
-[01] Extraction & Inspection   → dtype audit, shape check, nulls mapped
-        │
-        ▼
-[02] Cleaning & ETL            → business-logic nulls, dedup on ride_id,
-        │                         category standardisation, anomaly removal
-        ▼
-[03] EDA                       → distributions, heatmaps, peak-hour patterns
-        │
-        ▼
-[04] Statistical Analysis      → z-score demand intensity, correlation tests,
-        │                         revenue leakage simulation
-        ▼
-[05] Load Prep                 → final schema, export to cleaned_rides.csv
+Raw CSV  →  51,000 rows  ·  13 columns
+     │
+     ├─ [01] Extraction       audit dtypes, nulls, shape
+     │
+     ├─ [02] Cleaning & ETL   business-logic nulls, dedup on ride_id,
+     │                        category standardisation, anomaly removal
+     │
+     ├─ [03] EDA              distributions, heatmaps, peak-hour patterns
+     │
+     ├─ [04] Statistics       z-score demand intensity, correlation tests,
+     │                        revenue leakage simulation
+     │
+     └─ [05] Load Prep        final schema export
 
-Cleaned Output: 49,801 rows · 30 engineered columns
+Cleaned Output  →  49,801 rows  ·  30 engineered columns
 ```
 
 **Key engineering decisions:**
 - Cancelled rides → fare set to `0` (not dropped) — preserves cancellation signal
 - `total_fare` recomputed as `ride_charge + misc_charge` to fix source inconsistencies
-- 17 new features built: `peak_hour`, `demand_intensity`, `fare_per_km`, `ride_efficiency`, `avg_speed_kmh`, and more
+- 17 new features: `peak_hour`, `demand_intensity`, `fare_per_km`, `ride_efficiency`, `avg_speed_kmh` and more
 
 ---
 
@@ -89,9 +94,11 @@ Cleaned Output: 49,801 rows · 30 engineered columns
 
 <div align="center">
 
-[![Open Tableau Dashboard](https://img.shields.io/badge/Tableau-Open%20Interactive%20Dashboard-%23E97627?style=for-the-badge&logo=tableau&logoColor=white)](https://public.tableau.com/views/Rapido_Rides_Analysis_17780461220670/Overview?:language=en-US&:display_count=n&:origin=viz_share_link)
+[![Open Tableau Dashboard](https://img.shields.io/badge/Open%20Interactive%20Dashboard-FFCC00?style=for-the-badge&logo=tableau&logoColor=000000&label=Tableau&labelColor=000000)](https://public.tableau.com/views/Rapido_Rides_Analysis_17780461220670/Overview?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 </div>
+
+<br/>
 
 The dashboard covers:
 - **Overview** — Revenue KPIs, cancellation rate, ride volume by service
@@ -104,16 +111,6 @@ Dashboard screenshots → [`tableau/screenshots/`](tableau/screenshots/)
 ---
 
 ## Tech Stack
-
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
-![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-
-</div>
 
 | Tool | What it did |
 |:---|:---|
@@ -130,17 +127,17 @@ Dashboard screenshots → [`tableau/screenshots/`](tableau/screenshots/)
 ```
 rapido-revenue-leak-analysis/
 ├── data/
-│   ├── raw/                    ← Original 51,000-row dataset
-│   └── processed/              ← Cleaned 49,801-row output
+│   ├── raw/                         ← Original 51,000-row dataset
+│   └── processed/                   ← Cleaned 49,801-row output
 ├── notebooks/
-│   ├── 01_extraction.ipynb     ← Load & inspect
-│   ├── 02_cleaning.ipynb       ← ETL & feature engineering
-│   ├── 03_EDA.ipynb            ← Exploratory analysis
-│   ├── 04_statistical_analysis.ipynb  ← Demand modelling & leakage sim
+│   ├── 01_extraction.ipynb          ← Load & inspect
+│   ├── 02_cleaning.ipynb            ← ETL & feature engineering
+│   ├── 03_EDA.ipynb                 ← Exploratory analysis
+│   ├── 04_statistical_analysis.ipynb← Demand modelling & leakage sim
 │   └── 05_final_load_prep.ipynb
 ├── tableau/
-│   ├── dashboard_links.md      ← Live dashboard link + previews
-│   └── screenshots/            ← Dashboard images
+│   ├── dashboard_links.md           ← Live dashboard link + previews
+│   └── screenshots/
 ├── reports/
 │   └── Rapido-Ride-Analysis.pdf
 └── docs/
@@ -164,8 +161,8 @@ rapido-revenue-leak-analysis/
 
 <div align="center">
 
-![footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,20&height=120&section=footer&animation=fadeIn)
+![footer](https://capsule-render.vercel.app/api?type=waving&color=FFCC00&height=130&section=footer&animation=fadeIn&fontColor=000000&text=Built%20by%20Vedant%20Madne&fontSize=20&fontAlignY=65)
 
-**Built by [Vedant Madne](https://github.com/vedant-valid) — turning raw ride data into revenue decisions**
+[![GitHub](https://img.shields.io/badge/vedant--valid-000000?style=for-the-badge&logo=github&logoColor=FFCC00)](https://github.com/vedant-valid)
 
 </div>
