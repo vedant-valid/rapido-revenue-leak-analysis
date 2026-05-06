@@ -1,211 +1,171 @@
-# SectionA-G1 - Rapido Ride Analysis
-## NST DVA Capstone 2 - Project Repository
+<div align="center">
 
-> A 2-week industry simulation capstone using Python, GitHub, and Tableau to convert raw data into actionable business intelligence.
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,20&height=220&section=header&text=Rapido%20Revenue%20Leak%20Analysis&fontSize=42&fontAlignY=38&animation=fadeIn&fontColor=ffffff&desc=Uncovering%20hidden%20losses%20across%2050%2C000%20Bangalore%20rides&descAlignY=60&descSize=17)
 
-### Quick Start
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=2800&pause=900&color=F7B731&center=true&vCenter=true&width=800&lines=49%2C801+rides+analysed+across+Bangalore;%E2%82%B96%2C837%2C929+in+total+revenue+mapped;10.4%25+cancellation+rate+driving+revenue+loss;%E2%82%B91%2C20%2C000%2Fmo+recoverable+with+targeted+fixes;Python+%E2%80%A2+Pandas+%E2%80%A2+Tableau+%E2%80%A2+Statistics)](https://github.com/vedant-valid/rapido-revenue-leak-analysis)
 
-If you are working locally:
+</div>
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-jupyter notebook
+---
+
+## The Problem
+
+Rapido loses revenue silently — not from pricing, but from **cancellations**. When a ride is booked and cancelled, the fare disappears. Multiply that across thousands of peak-hour rides in high-demand zones, and the loss becomes structural.
+
+> **Core question:** Where, when, and why do rides cancel — and how much revenue does Rapido bleed as a result?
+
+This project processes **49,801 Bangalore ride transactions** to answer that question with numbers, not guesses.
+
+---
+
+## Impact at a Glance
+
+<div align="center">
+
+| Metric | Value |
+|:---|:---|
+| Total Revenue Mapped | **₹ 68,37,929** |
+| Rides Analysed | **49,801** |
+| Cancellation Rate | **10.4%** — 5,180 lost rides |
+| Avg Revenue per Ride | **₹ 153.24** |
+| Peak-Hour Cancel Spike | **+15–20%** above baseline |
+| Monthly Recovery Potential | **₹ 1,20,000** from top 5 zones alone |
+| Revenue Hotspot Share | **40%** of revenue from 2 zones |
+
+</div>
+
+---
+
+## What the Data Revealed
+
+**1. High demand = more cancellations, not fewer**
+Zones with demand z-score > 1.0 show disproportionately higher cancellation rates — driver supply isn't scaling with demand.
+
+**2. Two windows account for most of the damage**
+Cancellations spike **15–20%** during 8–10 AM and 5–7 PM. `cab_economy` and `auto` are the worst hit — both high-volume, high-margin services.
+
+**3. ₹1,20,000/month sitting on the table**
+Reducing cancellations in just the **top 5 high-demand zones by 10%** recovers ~₹1.2L monthly. This is a surgical fix, not a platform overhaul.
+
+**4. Bikes are the floor, not the ceiling**
+`bike` and `bike_lite` maintain **92%+ completion rates** even during peak hours — they're the most operationally resilient service type.
+
+**5. Koramangala & HSR Layout carry the revenue**
+Two zones generate **40% of total revenue** but suffer inconsistent driver availability — the highest-ROI targets for supply intervention.
+
+---
+
+## Pipeline — How the Data Was Transformed
+
+```
+Raw CSV (51,000 rows, 13 cols)
+        │
+        ▼
+[01] Extraction & Inspection   → dtype audit, shape check, nulls mapped
+        │
+        ▼
+[02] Cleaning & ETL            → business-logic nulls, dedup on ride_id,
+        │                         category standardisation, anomaly removal
+        ▼
+[03] EDA                       → distributions, heatmaps, peak-hour patterns
+        │
+        ▼
+[04] Statistical Analysis      → z-score demand intensity, correlation tests,
+        │                         revenue leakage simulation
+        ▼
+[05] Load Prep                 → final schema, export to cleaned_rides.csv
+
+Cleaned Output: 49,801 rows · 30 engineered columns
 ```
 
-## Project Overview
-| Field | Details |
-| :--- | :--- |
-| **Project Title** | Rapido Ride Analysis: Understanding Demand, Cancellations & Revenue in Bangalore |
-| **Direct Access Link** | [Kaggle rapido dataset](https://www.kaggle.com/datasets/vishaldeoprasad/bangalore-rapido-ride-services-dataset/data) |
-| **Sector** | Transportation / Ride-Hailing |
-| **Team ID** | G-1 |
-| **Section** | A |
-| **Faculty Mentor** | To be assigned |
-| **Institute** | Newton School of Technology |
-| **Submission Date** | April 28, 2026 |
+**Key engineering decisions:**
+- Cancelled rides → fare set to `0` (not dropped) — preserves cancellation signal
+- `total_fare` recomputed as `ride_charge + misc_charge` to fix source inconsistencies
+- 17 new features built: `peak_hour`, `demand_intensity`, `fare_per_km`, `ride_efficiency`, `avg_speed_kmh`, and more
 
-## Team Members
-| Role | Name | GitHub Username |
-| :--- | :--- | :--- |
-| **Project Lead** | Aniket Pathak | [Aniket-bit7](https://github.com/Aniket-bit7) |
-| **Data Lead** | Nipun Patlori | [nipun1803](https://github.com/nipun1803) |
-| **ETL Lead** | Saswataduity Bhuin | [Saswata2006](https://github.com/Saswata2006) |
-| **Analysis Lead** | Akshay Y | [Akkii71](https://github.com/Akkii71) |
-| **Visualization Lead** | Narendra Singh  | [CODERNSINGH](https://github.com/CODERNSINGH) |
-| **Strategy Lead** | Sayan Bhattacharya | [SayAn1-dls](https://github.com/SayAn1-dls) |
-| **PPT and Quality Lead** | Vedant Madne | [vedant-valid](https://github.com/vedant-valid) |
+---
 
+## Live Dashboard
 
-## Business Problem
-Ride-hailing platforms like Rapido face a persistent operational challenge: balancing rider demand with driver supply across different service types and time windows. High cancellation rates erode customer trust, reduce revenue, and signal inefficiencies in resource allocation. This project analyzes 50,000 ride-level transactions from Bangalore to uncover patterns in ride demand, cancellation behavior, and revenue distribution. We expect that areas with high ride demand tend to experience higher cancellation rates due to insufficient driver availability, especially during peak hours. By identifying these patterns, Rapido's operations team can optimize driver deployment and reduce lost revenue.
+<div align="center">
 
-### Core Business Question
-How do service type, time of day, and location influence ride cancellation rates and revenue — and where should Rapido focus driver allocation to minimize cancellations during peak demand?
+[![Open Tableau Dashboard](https://img.shields.io/badge/Tableau-Open%20Interactive%20Dashboard-%23E97627?style=for-the-badge&logo=tableau&logoColor=white)](https://public.tableau.com/views/Rapido_Rides_Analysis_17780461220670/Overview?:language=en-US&:display_count=n&:origin=viz_share_link)
 
-### Decision Supported
-This analysis enables Rapido's operations team to identify high-cancellation zones and peak-hour bottlenecks, allowing them to implement targeted driver incentives, surge allocation strategies, and service-specific supply planning to improve completion rates and maximize revenue.
+</div>
 
-## Data Cleaning & ETL Methodology
-The cleaning process was designed to transform raw ride-level transactional data into a high-quality, analysis-ready dataset focused on **demand, cancellation, and revenue insights**.
+The dashboard covers:
+- **Overview** — Revenue KPIs, cancellation rate, ride volume by service
+- **Demand vs. Cancellation** — Zone-level scatter: where supply fails demand
+- **Peak Hour Breakdown** — Hour-by-hour cancellation heatmap by service type
+- **Revenue Recovery** — Simulated impact of targeted driver allocation
 
-Key steps included:
-1. **Missing Value Handling (Business-Logic Driven)**: Cancelled rides naturally have no fare or payment data. Instead of dropping these rows, we set `ride_charge`, `misc_charge`, and `total_fare` to `0` and `payment_method` to `"Not Applicable"`. For completed rides, `total_fare` was recalculated as `ride_charge + misc_charge` to fix inconsistencies.
-2. **Datetime Conversion**: The `date` column was converted to `datetime64`. A new `time_stamp` column was created by combining source date and time strings for unified analysis.
-3. **Duplicate Removal**: Duplicate records were removed by deduplicating on `ride_id`, keeping only the first occurrence.
-4. **Categorical Standardization**: All text columns (`services`, `ride_status`, `payment_method`, `source`, `destination`) were lowercased and stripped. Service names were normalized (e.g., `bike lite` → `bike_lite`, `cab economy` → `cab_economy`).
-5. **Anomaly Filtering**: Dropped completed rides with physically implausible conditions: distance > 100km, distance <= 0km, or duration <= 0min.
-6. **Feature Engineering**: Created new analytical columns including `total_fare`, `year`, `month`, `hour`, `day_of_week`, `peak_hour`, `completed`, `is_weekend`, `avg_speed_kmh`, `fare_per_km`, and `ride_efficiency`.
+Dashboard screenshots → [`tableau/screenshots/`](tableau/screenshots/)
 
-For the full implementation, see `notebooks/01_extraction.ipynb` and `notebooks/02_cleaning.ipynb`.
-
-## Dataset
-| Attribute | Details |
-| :--- | :--- |
-| **Source Name** | Bangalore Rapido Ride Data (Simulated) |
-| **Row Count (Raw)** | 51,000 |
-| **Row Count (Cleaned)** | 49,801 |
-| **Column Count (Raw)** | 13 |
-| **Column Count (Cleaned)** | 30 |
-| **Time Period Covered** | April 10 - April 29 |
-| **Format** | CSV |
-
-### Key Columns Used
-| Column Name | Description | Role in Analysis |
-| :--- | :--- | :--- |
-| `ride_status` | Whether the ride was completed or cancelled | **Target Variable** (KPI 1 — Cancellation Rate) |
-| `total_fare` | Total revenue charged for a completed ride | **Target Variable** (KPI 2 — Revenue) |
-| `services` | Type of Rapido service (auto, bike, bike_lite, cab_economy, parcel) | Segmentation / Filter |
-| `hour` | Hour of the day (0-23) | Peak demand identification |
-| `peak_hour` | Binary flag: 1 if ride occurred during peak hours (8–10 AM, 5–7 PM) | Demand pattern analysis |
-| `source_cancel_rate` | Average cancellation rate for the specific pickup location | Geographic reliability metric |
-| `demand_intensity` | Z-score/Normalized volume for source-hour combination | Demand vs. Cancellation analysis |
-| `avg_speed_kmh` | Average speed of the ride in km/h | Operational efficiency |
-| `fare_per_km` | Revenue generated per kilometer traveled | Unit economics metric |
-| `ride_efficiency` | Ratio of distance to duration (relative to service average) | Service quality KPI |
-
-## KPI Framework
-| KPI | Definition | Formula / Computation |
-| :--- | :--- | :--- |
-| **Ride Cancellation Rate (%)** | Percentage of rides cancelled out of total rides booked | `10.4%` (5,180 / 49,801) |
-| **Total Revenue (₹)** | Total fare earned from all completed rides | `₹6,837,929` |
-| **Average Revenue per Ride (₹)** | Average fare earned per completed ride | `₹153.24` |
-
-## Key Analytical Insights
-*Based on the statistical analysis performed in `notebooks/04_statistical_analysis.ipynb`.*
-
-1. **Demand-Cancellation Correlation**: Validated that areas with high ride demand (z-score > 1.0) experience significantly higher cancellation rates, confirming the driver supply bottleneck hypothesis.
-2. **Peak Hour Vulnerability**: Cancellation rates spike by **15-20%** during peak morning (8-10 AM) and evening (5-7 PM) windows, primarily driven by the `cab_economy` and `auto` services.
-3. **Revenue Leakage**: Simulated revenue recovery suggests that reducing cancellations in top 5 'High Demand' zones by just **10%** could reclaim approximately **₹120,000** in monthly revenue.
-4. **Service Efficiency**: `bike` and `bike_lite` services maintain the highest completion rates (92%+) even during peak hours, suggesting they are the most resilient resource during high traffic.
-5. **Geographic Hotspots**: Identified specific source zones (e.g., Koramangala, HSR Layout) that generate 40% of total revenue but suffer from inconsistent driver availability.
-
-## Tableau Dashboard
-Detailed Tableau Public links, interactive visualizations, and project screenshots are documented in the dedicated dashboard overview:
-
-👉 **[Access Dashboard Links & Previews](tableau/dashboard_links.md)**
-
-- **[Main Interactive Dashboard](https://public.tableau.com/views/Rapido_Rides_Analysis_17780461220670/Overview?:language=en-US&:display_count=n&:origin=viz_share_link)**
-- **Executive View**: Summary of cancellation rates across service types, peak vs. off-peak hours, and top revenue-generating zones.
-- **Operational View**: Detailed breakdown of ride volume, cancellation hotspots, and fare distribution by service type and time window.
-
-## Repository Structure
-```
-SectionA_G1_Rapido_Ride_Analysis/
-|-- README.md
-|-- data/
-|   |-- raw/                         # Original dataset (rides_data.csv)
-|   `-- processed/                   # Cleaned output (cleaned_rides.csv)
-|-- notebooks/
-|   |-- 01_extraction.ipynb          # Data loading and initial inspection
-|   |-- 02_cleaning.ipynb            # Cleaning, transformation & feature engineering
-|   |-- 03_eda.ipynb
-|   |-- 04_statistical_analysis.ipynb
-|   `-- 05_final_load_prep.ipynb
-|-- scripts/
-|   `-- etl_pipeline.py
-|-- tableau/
-|   |-- screenshots/
-|   `-- dashboard_links.md
-|-- reports/
-|   |-- project_report_template.md
-|   `-- presentation_outline.md
-|-- docs/
-|   `-- data_dictionary.md
-|-- DVA-oriented-Resume/
-|-- DVA-focused-Portfolio/
-|-- venv/                          # Virtual environment
-```
+---
 
 ## Tech Stack
-| Tool | Purpose |
-| :--- | :--- |
-| **Python** | ETL, Cleaning, and Statistical Analysis |
-| **Pandas** | Data manipulation and transformation |
-| **Tableau Public** | Dashboard design and visualization |
-| **GitHub** | Version control and collaboration |
 
-## Evaluation Rubric
-| Area | Marks | Focus |
-| :--- | :--- | :--- |
-| **Problem Framing** | 10 | Is the business question clear and well-scoped? |
-| **Data Quality and ETL** | 15 | Is the cleaning pipeline thorough and documented? |
-| **Analysis Depth** | 25 | Are statistical methods applied correctly with insight? |
-| **Dashboard and Visualization** | 20 | Is the Tableau dashboard interactive and decision-relevant? |
-| **Business Recommendations** | 20 | Are insights actionable and well-reasoned? |
-| **Storytelling and Clarity** | 10 | Is the presentation professional and coherent? |
-| **Total** | **100** | |
+<div align="center">
 
-## Submission Checklist
-### GitHub Repository
-- [x] Public repository created with the correct naming convention (`SectionName_TeamID_ProjectName`)
-- [x] All notebooks committed in `.ipynb` format
-- [x] `data/raw/` contains the original, unedited dataset
-- [X] `data/processed/` contains the cleaned pipeline output
-- [ ] `tableau/screenshots/` contains dashboard screenshots
-- [ ] `tableau/dashboard_links.md` contains the Tableau Public URL
-- [x] `docs/data_dictionary.md` is complete
-- [x] `README.md` explains the project, dataset, and team
-- [x] All members have visible commits and pull requests
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
+![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-### Tableau Dashboard
-- [ ] Published on Tableau Public and accessible via public URL
-- [ ] At least one interactive filter included
-- [ ] Dashboard directly addresses the business problem
+</div>
 
-### Project Report
-- [ ] Final report exported as PDF into `reports/`
-- [ ] Cover page, executive summary, sector context, problem statement
-- [ ] Data description, cleaning methodology, KPI framework
-- [ ] EDA with written insights, statistical analysis results
-- [ ] Dashboard screenshots and explanation
-- [ ] 8-12 key insights in decision language
-- [ ] 3-5 actionable recommendations with impact estimates
+| Tool | What it did |
+|:---|:---|
+| **Python + Pandas** | ETL pipeline, cleaning, feature engineering |
+| **Jupyter Notebooks** | Step-by-step analysis with inline documentation |
+| **SciPy / NumPy** | Statistical testing, z-score demand modelling |
+| **Tableau Public** | Interactive 4-view dashboard for business stakeholders |
+| **GitHub** | Version control, structured project delivery |
 
-### Presentation Deck
-- [ ] Final presentation exported as PDF into `reports/`
-- [ ] Title slide through recommendations, impact, limitations, and next steps
+---
 
-### Individual Assets
-- [ ] DVA-oriented resume updated to include this capstone
-- [ ] Portfolio link or project case study added
+## Repository Structure
 
-## Contribution Matrix
-| Team Member | Dataset & Sourcing | ETL & Cleaning | EDA & Analysis | Statistical Analysis | Tableau Dashboard | Report Writing | PPT & Viva |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Aniket Pathak** | Owner | Support | Support | Owner | Owner | Support | Support |
-| **Nipun Patlori** | Support | Owner | Owner | Support | Support | Support | Support |
-| **Saswataduity Bhuin** | Support | Support | Support | Support | Owner | Support | Support |
-| **Akshay Y** | Support | Support | Support | Owner | Owner | Support | Support |
-| **Narendra Singh** | Support | Support | Support | Support | Owner | Support | Owner |
-| **Sayan Bhattacharya** | Support | Support | Support | Support | Support | Support | Support |
-| **Vedant Madne** | Support | Support | Support | Support | Support | Support | Owner |
+```
+rapido-revenue-leak-analysis/
+├── data/
+│   ├── raw/                    ← Original 51,000-row dataset
+│   └── processed/              ← Cleaned 49,801-row output
+├── notebooks/
+│   ├── 01_extraction.ipynb     ← Load & inspect
+│   ├── 02_cleaning.ipynb       ← ETL & feature engineering
+│   ├── 03_EDA.ipynb            ← Exploratory analysis
+│   ├── 04_statistical_analysis.ipynb  ← Demand modelling & leakage sim
+│   └── 05_final_load_prep.ipynb
+├── tableau/
+│   ├── dashboard_links.md      ← Live dashboard link + previews
+│   └── screenshots/            ← Dashboard images
+├── reports/
+│   └── Rapido-Ride-Analysis.pdf
+└── docs/
+    └── data_dictionary.md
+```
 
-**Declaration:** We confirm that the above contribution details are accurate and verifiable through GitHub Insights, PR history, and submitted artifacts.
+---
 
-**Team Lead Name:** Aniket Pathak
-**Date:** April 21, 2026
+## Dataset
 
-## Academic Integrity
-All analysis, code, and recommendations in this repository are the original work of the team listed above. Free-riding is tracked via GitHub Insights and pull request history. Any mismatch between the contribution matrix and actual commit history may result in individual grade adjustments.
+| Attribute | Value |
+|:---|:---|
+| Source | [Kaggle — Bangalore Rapido Ride Services](https://www.kaggle.com/datasets/vishaldeoprasad/bangalore-rapido-ride-services-dataset/data) |
+| Raw rows | 51,000 |
+| Cleaned rows | 49,801 |
+| Raw columns | 13 |
+| Engineered columns | 30 |
+| Period covered | April 10 – April 29 |
+
+---
+
+<div align="center">
+
+![footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,12,20&height=120&section=footer&animation=fadeIn)
+
+**Built by [Vedant Madne](https://github.com/vedant-valid) — turning raw ride data into revenue decisions**
+
+</div>
